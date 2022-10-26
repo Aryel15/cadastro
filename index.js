@@ -39,7 +39,7 @@ console.log(result2);
 
 ;(async () => {
     const database = require('../cadastro-1/model/services/dborm.js');
-    const Cliente = require('../cadastro-1/model/entidade/cliente.js');
+    const {Cliente} = require('../cadastro-1/model/entidade/cliente.js');
 
     console.log('Criar tabela =============================================================');
     const resultado = await database.sequelize.sync();
@@ -51,9 +51,18 @@ console.log(result2);
             endereco: 'Rua Paulista, n 1000'
         })
         console.log(inserirCliente);
-        console.log('Buscar um registro =============================================================');
+    console.log('Buscar um registro =============================================================');
         const cliente = await Cliente.findByPk(1);
         console.log(cliente);
+    console.log('Alterar um registro =============================================================');
+        const clienteAlterar = await Cliente.findByPk(1);
+        clienteAlterar.nome = "Icaro Freitas"
+        const resultadoSave = await clienteAlterar.save();
+        console.log(resultadoSave);
+
+    console.log('Buscar todos os registros =============================================================');
+        const clientes = await Cliente.findAll();
+        console.log(clientes);
 })();
 
 //ultima linha
